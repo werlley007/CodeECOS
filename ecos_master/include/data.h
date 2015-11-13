@@ -22,8 +22,8 @@ idxint m = 0;	//m Número de restrições conicas, ou seja, uma dimensão da mat
 idxint p = 2;	//p Número de restrições lineares de igualdade, ou seja, uma dimensão da matriz A e comprimento do vector b
 idxint l = 0;	//l dimensao dos cones
 idxint ncones = 0;      //ncones Número de cones de segunda ordem presentes no problema
-idxint *q = NULL;	//q Disposição de ncones comprimento; Q [i] define a dimensão do cone i
-idxint e = 0;		//e Número de cones exponenciais presentes no problema		
+idxint *q = 0;	//q Disposição de ncones comprimento; Q [i] define a dimensão do cone i
+//idxint e = 0;		//e Número de cones exponenciais presentes no problema		
 
 //Gpr, Gjc, Gir Arrays para a matriz G na coluna comprimido de armazenamento (CCS)	
 idxint *Gjc = NULL;	
@@ -31,10 +31,9 @@ idxint *Gir = NULL;
 pfloat *Gpr = NULL;
 
 //Apr, Ajc, Air Arrays para a matriz A na coluna comprimido de armazenamento (CCS). Pode ser NULL se não há restrições de igualdade estão presentes
-idxint Ajc[4] = {1, 1, 2, 2};	
-idxint Air[4] = {1, 2, 1, 2};	
-pfloat Apr[4] = {-1, 1, 1, 3};	
-pfloat c[2] = {1, 2};	//c matriz de comprimento n
+idxint Ajc[3] = {1, 4, 7};	
+idxint Air[6] = {1, 2, 3, 1, 2, 4};	
+pfloat Apr[6] = {-1, 1, 1, 1, -3, 1};	
+pfloat c[4] = {1, 2, 0, 0};	//c matriz de comprimento n
 pfloat *h = NULL;	//h matriz de comprimento m
 pfloat b[2] = {5, 6};	//b matriz de comprimento p. Pode ser NULL se não há restrições de igualdade estão presentes
-
