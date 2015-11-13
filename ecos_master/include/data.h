@@ -14,7 +14,7 @@ pfloat *Gpr = NULL;
 //Apr, Ajc, Air Arrays para a matriz A na coluna comprimido de armazenamento (CCS). Pode ser NULL se não há restrições de igualdade estão presentes
 idxint Ajc[3] = {0, 3, 6};	
 idxint Air[6] = {0, 1, 2, 0, 1, 3};	
-pfloat Apr[6] = {-1, 1, 1, 1, -3, 1};	
+pfloat Apr[6] = {1, 1, 1, 1, 3, 1};	
 pfloat c[4] = {1, 2, 0, 0};	//c matriz de comprimento n
 pfloat *h = NULL;	//h matriz de comprimento m
 pfloat b[4] = {5, 6, 0, 0};	//b matriz de comprimento p. Pode ser NULL se não há restrições de igualdade estão presentes
