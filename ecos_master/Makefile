@@ -10,7 +10,7 @@ TEST_INCLUDES = -Itest -Itest/generated
 
 # Compile all C code, including the C-callable routine
 .PHONY: all
-all: libecos.a libecos_bb.a runecos runecosexp
+all: libecos.a libecos_bb.a runecos
 
 # build Tim Davis' sparse LDL package
 $(LDL):
@@ -62,10 +62,6 @@ runecos: src/runecos.c libecos.a
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 	echo ECOS successfully built. Type ./runecos to run demo problem.
 
-runecosexp: src/runecos_exp.c libecos.a
-	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
-	echo ECOS-Exp successfully built. Type ./runecosexp to run demo problem.
-
 # Shared library
 .PHONY: shared
 shared: $(SHAREDNAME)
@@ -101,4 +97,4 @@ clean:
 purge: clean
 	( cd external/ldl    ; $(MAKE) purge )
 	( cd external/amd    ; $(MAKE) purge )
-	- $(RM) libecos.a libecos_bb.a runecos runecosexp
+	- $(RM) libecos.a libecos_bb.a runecos
