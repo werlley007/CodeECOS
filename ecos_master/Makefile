@@ -10,34 +10,40 @@ TEST_INCLUDES = -Itest -Itest/generated
 
 # Compile all C code, including the C-callable routine
 .PHONY: all
-all: libecos.a libecos_bb.a runecos
+all: libecos.a libecos_bb.a runecos runecosexp
 
 # build Tim Davis' sparse LDL package
 $(LDL):
 	( cd external/ldl    ; $(MAKE) )
 	$(AR) -x external/ldl/libldl.a
+	
+	
 
 # build Tim Davis' AMD package
 $(AMD):
 	( cd external/amd    ; $(MAKE) )
+	$(AR) -t external/amd/libamd.a 
 	$(AR) -x external/amd/libamd.a
+	
+	
 
 # build ECOS
-ECOS_OBJS = ecos.o kkt.o cone.o spla.o ctrlc.o timer.o preproc.o splamm.o equil.o expcone.o wright_omega.o
+ECOS_OBJS = obj/ecos.o obj/kkt.o obj/cone.o obj/spla.o obj/ctrlc.o obj/timer.o obj/preproc.o obj/splamm.o obj/equil.o obj/expcone.o obj/wright_omega.o
 libecos.a: $(ECOS_OBJS) $(LDL) $(AMD)
-	$(ARCHIVE) $@ $^
-	- $(RANLIB) $@
+	$(ARCHIVE) obj/$@ $^
+	- $(RANLIB) obj/$@
 
 # build ECOS branch-and-bound
-ECOS_BB_OBJS = $(ECOS_OBJS) ecos_bb_preproc.o ecos_bb.o
+ECOS_BB_OBJS = $(ECOS_OBJS) obj/ecos_bb_preproc.o obj/ecos_bb.o
 libecos_bb.a: $(ECOS_BB_OBJS) $(LDL) $(AMD)
-	$(ARCHIVE) $@ $^
-	- $(RANLIB) $@
+	$(ARCHIVE) obj/$@ $^
+	- $(RANLIB) obj/$@
+	mv *.o obj/
 
-%.o : src/%.c
+obj/%.o : src/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-%.o : ecos_bb/%.c
+obj/%.o : ecos_bb/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 ecos_bb.o           : include/ecos_bb.h
@@ -58,9 +64,15 @@ wright_omega.o      : include/wright_omega.h
 # ECOS demo
 .PHONY: demo
 demo: runecos
-runecos: src/runecos.c libecos.a
+runecos: src/runecos.c obj/libecos.a
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 	echo ECOS successfully built. Type ./runecos to run demo problem.
+	
+
+runecosexp: src/runecos_exp.c obj/libecos.a
+	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
+	echo ECOS-Exp successfully built. Type ./runecosexp to run demo problem.
+	
 
 # Shared library
 .PHONY: shared
@@ -72,10 +84,10 @@ $(SHAREDNAME): $(LDL) $(AMD) $(ECOS_OBJS)
 TEST_OBJS = qcml_utils.o norm.o sq_norm.o sum_sq.o quad_over_lin.o inv_pos.o
 .PHONY: test
 test: ecostester ecos_bb_test
-ecostester: test/ecostester.c $(TEST_OBJS) libecos.a
+ecostester: test/ecostester.c $(TEST_OBJS) obj/libecos.a
 	$(CC) $(CFLAGS) $(TEST_INCLUDES) -o $@ $^ $(LDFLAGS)
 
-ecos_bb_test: test/bb_test.c libecos_bb.a
+ecos_bb_test: test/bb_test.c obj/libecos_bb.a
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
 %.o: test/generated/%.c test/generated/%.h
@@ -88,6 +100,7 @@ ecos_bb_test: test/bb_test.c libecos_bb.a
 # remove object files, but keep the compiled programs and library archives
 .PHONY: clean
 clean:
+	@rm -f obj/*.o obj/*.a
 	( cd external/ldl    ; $(MAKE) clean )
 	( cd external/amd    ; $(MAKE) clean )
 	- $(RM) $(CLEAN)
@@ -97,4 +110,4 @@ clean:
 purge: clean
 	( cd external/ldl    ; $(MAKE) purge )
 	( cd external/amd    ; $(MAKE) purge )
-	- $(RM) libecos.a libecos_bb.a runecos
+	- $(RM) obj/libecos.a obj/libecos_bb.a runecos runecosexp
