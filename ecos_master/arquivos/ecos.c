@@ -202,7 +202,8 @@ idxint checkExitConditions(pwork* w, idxint mode)
 #if PRINTLEVEL > 0
         if( w->stgs->verbose ) {
             if( mode == 0) {
-                PRINTTEXT("\nOPTIMAL (within feastol=%3.1e, reltol=%3.1e, abstol=%3.1e).", MAX(w->info->dres, w->info->pres), w->info->relgap, w->info->gap);
+                PRINTTEXT("\nOOPTIMAL (within feastol=%3.1e, reltol=%3.1e, abstol=%3.1e).", MAX(w->info->dres, w->info->pres), w->info->relgap, w->info->gap);
+	
             } else {
                 PRINTTEXT("\nClose to OPTIMAL (within feastol=%3.1e, reltol=%3.1e, abstol=%3.1e).", MAX(w->info->dres, w->info->pres), w->info->relgap, w->info->gap);
             }
@@ -262,7 +263,7 @@ idxint init(pwork* w)
 	idxint i, j, k, l, KKT_FACTOR_RETURN_CODE;
 	idxint* Pinv = w->KKT->Pinv;
     pfloat rx, ry, rz;
-
+	
 #if PROFILING > 1
 	timer tfactor, tkktsolve;
 #endif

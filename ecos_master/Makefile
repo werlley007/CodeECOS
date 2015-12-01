@@ -10,13 +10,13 @@ TEST_INCLUDES = -Itest -Itest/generated
 
 # Compile all C code, including the C-callable routine
 .PHONY: all
-all: libecos.a libecos_bb.a runecos runecosexp
+all: libecos.a libecos_bb.a runecos 
+#runecosexp
 
 # build Tim Davis' sparse LDL package
 $(LDL):
 	( cd external/ldl    ; $(MAKE) )
 	$(AR) -x external/ldl/libldl.a
-	
 	
 
 # build Tim Davis' AMD package
@@ -24,7 +24,6 @@ $(AMD):
 	( cd external/amd    ; $(MAKE) )
 	$(AR) -t external/amd/libamd.a 
 	$(AR) -x external/amd/libamd.a
-	
 	
 
 # build ECOS
@@ -41,6 +40,9 @@ libecos_bb.a: $(ECOS_BB_OBJS) $(LDL) $(AMD)
 	mv *.o obj/
 
 obj/%.o : src/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+obj/%.o : arquivos/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 obj/%.o : ecos_bb/%.c
@@ -69,9 +71,9 @@ runecos: src/runecos.c obj/libecos.a
 	echo ECOS successfully built. Type ./runecos to run demo problem.
 	
 
-runecosexp: src/runecos_exp.c obj/libecos.a
-	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
-	echo ECOS-Exp successfully built. Type ./runecosexp to run demo problem.
+#runecosexp: src/runecos_exp.c obj/libecos.a
+#	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
+#	echo ECOS-Exp successfully built. Type ./runecosexp to run demo problem.
 	
 
 # Shared library
@@ -110,4 +112,5 @@ clean:
 purge: clean
 	( cd external/ldl    ; $(MAKE) purge )
 	( cd external/amd    ; $(MAKE) purge )
-	- $(RM) obj/libecos.a obj/libecos_bb.a runecos runecosexp
+	- $(RM) obj/libecos.a obj/libecos_bb.a runecos 
+#runecosexp

@@ -41,8 +41,17 @@ int main(void)
 	
 		/* solve */	
 		exitflag = ECOS_solve(mywork);
-    
-    	/* test second solve
+
+		int ii;
+		for(ii = 0; ii < n; ii++){
+			
+			pfloat ecos_x = mywork->x[ii];
+
+			PRINTTEXT("\nRunecos teste Solution: %f", ecos_x);
+		}
+		PRINTTEXT("\n\n");
+    		
+    	/* test second solve		
     	exitflag = ECOS_solve(mywork); */
 
 #if PROFILING > 1 && PRINTLEVEL > 2

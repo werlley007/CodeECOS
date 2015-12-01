@@ -1,0 +1,99 @@
+
+Log started (V12.4.0.0) Mon Nov 30 19:44:07 2015
+
+CPLEX Error  1436: Max or Min missing.
+No file read.
+
+Problem 'ex01.lp' read.
+Read time =    0.00 sec.
+Tried aggregator 1 time.
+No LP presolve or aggregator reductions.
+Presolve time =    0.00 sec.
+
+Iteration log . . .
+Iteration:     1   Dual infeasibility =             0.000000
+Iteration:     2   Dual objective     =           202.500000
+
+Dual simplex - Optimal:  Objective =  2.0250000000e+02
+Solution time =    0.00 sec.  Iterations = 2 (1)
+Deterministic time = 0.00 ticks  (4.00 ticks/sec)
+
+
+Variable Name           Solution Value
+x1                           40.000000
+x2                           17.500000
+x3                           42.500000
+
+Problem 'ex02.lp' read.
+Read time =    0.00 sec.
+Dual infeasible due to empty column 'x1²'.
+Presolve time =    0.00 sec.
+Presolve - Unbounded or infeasible.
+Solution time =    0.00 sec.
+Deterministic time = 0.00 ticks  (1.11 ticks/sec)
+No solution exists.
+CPLEX Error  1607: Line 2: Expected '+' or '-', found '^'.
+No file read.
+
+Problem 'ex02.lp' read.
+Read time =    0.00 sec.
+Dual infeasible due to empty column 'x1x1'.
+Presolve time =    0.00 sec.
+Presolve - Unbounded or infeasible.
+Solution time =    0.00 sec.
+Deterministic time = 0.00 ticks  (1.11 ticks/sec)
+No solution exists.
+CPLEX Error  1607: Line 2: Expected '+' or '-', found '*'.
+No file read.
+
+Problem 'ex02.lp' read.
+Read time =    0.00 sec.
+Dual infeasible due to empty column 'x1x1'.
+Presolve time =    0.00 sec.
+Presolve - Unbounded or infeasible.
+Solution time =    0.00 sec.
+Deterministic time = 0.00 ticks  (1.11 ticks/sec)
+CPLEX Error  1616: Line 2: Expected identifier, found '*'.
+No file read.
+
+Problem 'ex02.lp' read.
+Read time =    0.00 sec.
+
+Problem 'ex02.lp' read.
+Read time =    0.00 sec.
+
+Problem 'ex02.lp' read.
+Read time =    0.00 sec.
+
+Problem 'ex02.lp' read.
+Read time =    0.00 sec.
+
+Problem 'ex01.lp' read.
+Read time =    0.00 sec.
+Tried aggregator 1 time.
+No LP presolve or aggregator reductions.
+Presolve time =    0.00 sec.
+
+Iteration log . . .
+Iteration:     1   Dual infeasibility =             0.000000
+Iteration:     2   Dual objective     =           202.500000
+
+Dual simplex - Optimal:  Objective =  2.0250000000e+02
+Solution time =    0.00 sec.  Iterations = 2 (1)
+Deterministic time = 0.00 ticks  (4.47 ticks/sec)
+
+
+Problem 'ex02.lp' read.
+Read time =    0.00 sec.
+Tried aggregator 1 time.
+No LP presolve or aggregator reductions.
+Presolve time =    0.00 sec.
+
+Iteration log . . .
+Iteration:     1   Dual infeasibility =             0.000000
+Iteration:     2   Dual objective     =           202.500000
+
+Dual simplex - Optimal:  Objective =  2.0250000000e+02
+Solution time =    0.00 sec.  Iterations = 2 (1)
+Deterministic time = 0.00 ticks  (4.47 ticks/sec)
+
